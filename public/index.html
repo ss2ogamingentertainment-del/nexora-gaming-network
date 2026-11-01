@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090d1b">
+  <title>NEXORA Gaming Network</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">N</span> NEXORA</a>
+    <nav><a href="#games">Games</a><a href="#rooms">Multiplayer</a></nav>
+    <div class="account" id="accountArea"><button class="btn btn-outline" id="openAuth">Sign in</button></div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">ONE ACCOUNT · MANY WORLDS</p>
+        <h1>PLAY TOGETHER.<br><span>GO BEYOND.</span></h1>
+        <p class="hero-sub">Discover browser games, create a room and invite friends from anywhere.</p>
+        <a class="btn btn-primary" href="#games">Explore games <span>→</span></a>
+      </div>
+      <div class="hero-art" aria-label="Abstract neon gaming portal">
+        <div class="orb orb-one"></div><div class="orb orb-two"></div><div class="portal">NX</div>
+        <div class="float-tag tag-one">MULTIPLAYER</div><div class="float-tag tag-two">YOUR WORLD</div>
+      </div>
+    </section>
+
+    <section class="section" id="games">
+      <div class="section-heading"><div><p class="eyebrow">CHOOSE YOUR WORLD</p><h2>Game library</h2></div><span class="muted">Browser-playable prototypes</span></div>
+      <div class="game-grid" id="gameGrid"></div>
+    </section>
+
+    <section class="section room-section" id="rooms">
+      <div class="section-heading"><div><p class="eyebrow">PLAY WITH YOUR CREW</p><h2>Multiplayer rooms</h2></div></div>
+      <div class="room-panel">
+        <div><h3>Create a room</h3><p class="muted">Choose a game, create a room code and invite your friends.</p>
+          <label for="roomGame">Game</label><select id="roomGame"></select>
+          <label class="check"><input type="checkbox" id="privateRoom" checked> Private room (invite by code)</label>
+          <button class="btn btn-primary full" id="createRoom">Create room</button>
+        </div>
+        <div class="room-divider"></div>
+        <div><h3>Join a room</h3><p class="muted">Enter the code shared by your friend.</p>
+          <label for="roomCode">Room code</label><input id="roomCode" maxlength="6" placeholder="e.g. A1B2C3" autocomplete="off">
+          <button class="btn btn-outline full" id="joinRoom">Join room</button>
+        </div>
+      </div>
+      <div class="room-live hidden" id="roomLive"></div>
+    </section>
+  </main>
+
+  <footer><span class="brand"><span class="brand-mark">N</span> NEXORA</span><span>Original games. Shared adventures.</span></footer>
+
+  <dialog id="authDialog">
+    <form method="dialog" class="dialog-close"><button aria-label="Close">×</button></form>
+    <p class="eyebrow">PLAYER ACCOUNT</p><h2 id="authTitle">Welcome back</h2>
+    <div class="auth-tabs"><button class="active" data-mode="login">Sign in</button><button data-mode="register">Create account</button></div>
+    <form id="authForm">
+      <label for="username">Username</label><input id="username" minlength="3" maxlength="16" pattern="[A-Za-z0-9_]+" required autocomplete="username">
+      <label for="password">Password</label><input id="password" type="password" minlength="10" maxlength="72" required autocomplete="current-password">
+      <p class="hint">Use a unique password (at least 10 characters). Never share it with other players.</p>
+      <p class="form-error" id="authError" role="alert"></p><button class="btn btn-primary full" id="authSubmit">Sign in</button>
+    </form>
+  </dialog>
+
+  <dialog id="gameDialog" class="game-dialog">
+    <div class="game-dialog-head"><div><p class="eyebrow">NEXORA ARCADE</p><h2 id="gameTitle">Game</h2></div><button class="icon-btn" id="closeGame" aria-label="Close game">×</button></div>
+    <div id="gameStage" class="game-stage"></div>
+    <p class="hint" id="gameHint"></p>
+  </dialog>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/games.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
